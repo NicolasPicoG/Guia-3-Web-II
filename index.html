@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- CSS only -->
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"
+    />
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="main.js"></script>
+
+    <div class="text-center">
+      <br />
+      <br />
+      <br />
+    </div>
+    <div>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mt-5">
+            <h3>Reloj digital</h3>
+            <div id="reloj"></div>
+          </div>
+          <div class="col-4">
+            <h1>_____________________</h1>
+            <div class="form-group">
+              <label>Código</label>
+              <input type="text" class="form-control" id="code" />
+              <label>Nombre</label>
+              <input type="text" class="form-control" id="name" />
+              <label>Apellido</label>
+              <input type="text" class="form-control" id="second_name" />
+              <label>Nota</label>
+              <input type="text" class="form-control" id="note" />
+              <label>Edad</label>
+              <input type="text" class="form-control" id="age" />
+            </div>
+            <button class="btn btn-success" id="add-btn">
+              Añadir Estudiante
+            </button>
+          </div>
+          <div class="col-8">
+            <h2>Lista de Estudiantes</h2>
+            <h1>____________________________________________</h1>
+            <div id="table-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function () {});
+
+      async function iniciarReloj() {
+        /* Valores iniciales */
+        var hora = 0;
+        var minuto = 0;
+        var segundo = 0;
+
+        /* Contenedor del reloj */
+        var contenedor = document.getElementById("reloj");
+
+        /* Contenido del reloj */
+        var reloj;
+
+        while (hora <= 23) {
+          while (minuto <= 59) {
+            while (segundo <= 59) {
+              reloj =
+                agregarCero(hora) +
+                ":" +
+                agregarCero(minuto) +
+                ":" +
+                agregarCero(segundo);
+
+              contenedor.innerHTML = reloj;
+
+              segundo++;
+              await sleep(1000);
+            }
+
+            minuto++;
+            segundo = 0;
+          }
+
+          hora++;
+          minuto = 0;
+        }
+      }
+
+      /* Iniciamos el reloj */
+      iniciarReloj();
+
+      /**
+       * Se encarga de realizar una pausa, por N milisegundos
+       */
+      function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      /**
+       * Agrega un 0 si el numero esta entre 0 y 9
+       */
+      function agregarCero(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+
+        return i;
+      }
+    </script>
+  </body>
+</html>
